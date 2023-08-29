@@ -1,7 +1,10 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const PORT = process.env.PORT || 3500;
+const express = require('express')
+const app = express()
+const path = require('path')
+const {logger} = require('./middleware/logger')
+const PORT = process.env.PORT || 3500
+
+app.use(logger);
 
 app.use(express.json());
 
@@ -21,4 +24,4 @@ app.all('*', (req, res)=>{
     }
 });
 
-app.listen(PORT, () => console.log(`Server is runnung on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server is runnung on port ${PORT}`))
