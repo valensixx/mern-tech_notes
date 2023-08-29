@@ -3,16 +3,19 @@ const app = express()
 const path = require('path')
 const {logger} = require('./middleware/logger')
 const errorHandler = require('./middleware/errorHandler')
+const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 3500
 
 app.use(logger);
 
-app.use(express.json());
+app.use(express.json())
+
+app.use(cookieParser())
 
 app.use('/', express.static(path.join(__dirname, '/public'))) 
 //__dirname is global var for nodejs - it says look inside the falder we are in
 
-app.use('/',require('./routes/root'));
+app.use('/',require('./routes/root'))
 
 app.all('*', (req, res)=>{
     res.status(404);
