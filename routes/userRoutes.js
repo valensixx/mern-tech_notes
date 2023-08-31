@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const usersControler = require('../controllers/usersController')
+const usersController = require('../controllers/usersController')
 
 router.route('/')
-    .get(usersController.getAllUsers) //match as crud --> read
-    .post(usersController.createNewUser) // --> create
-    .patch(usersController.updateUser) // --> update 
-    .delete(usersController.deleteUser) // --> delete
+    .get(usersController.getAllUsers)
+    .post(usersController.createNewUser)
+    .patch(usersController.updateUser)
+    .delete(usersController.deleteUser)
 
 module.exports = router

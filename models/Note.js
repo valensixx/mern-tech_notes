@@ -5,17 +5,17 @@ const noteSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            require: true,
+            required: true,
             ref: 'User'
         },
         title: {
             type: String,
-            require: true
+            required: true
         },
-        text: [{
+        text: {
             type: String,
-            require: true
-        }],
+            required: true
+        },
         completed: {
             type: Boolean,
             default: false
@@ -26,10 +26,10 @@ const noteSchema = new mongoose.Schema(
     }
 )
 
-noteSchema.plugin(AutoIncrement,{
+noteSchema.plugin(AutoIncrement, {
     inc_field: 'ticket',
-    id: 'ticketNums', 
+    id: 'ticketNums',
     start_seq: 500
 })
 
-model.exports = mongoose.model('Note', noteSchema)
+module.exports = mongoose.model('Note', noteSchema)
