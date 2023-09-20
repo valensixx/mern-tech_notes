@@ -51,8 +51,7 @@ const createNewUser = asyncHandler(async (req, res) => {
     }
 })
 
-
-// @desc Update user
+// @desc Update a user
 // @route PATCH /users
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
@@ -92,9 +91,9 @@ const updateUser = asyncHandler(async (req, res) => {
     res.json({ message: `${updatedUser.username} updated` })
 })
 
-// @desc Delete user
+// @desc Delete a user
 // @route DELETE /users
-// @access Private 
+// @access Private
 const deleteUser = asyncHandler(async (req, res) => {
     const { id } = req.body
 

@@ -5,12 +5,11 @@ const asyncHandler = require('express-async-handler')
 // @desc Get all notes 
 // @route GET /notes
 // @access Private
-
 const getAllNotes = asyncHandler(async (req, res) => {
-    //Get all notes form MongoDB
+    // Get all notes from MongoDB
     const notes = await Note.find().lean()
 
-    //If no notes
+    // If no notes 
     if (!notes?.length) {
         return res.status(400).json({ message: 'No notes found' })
     }
@@ -29,11 +28,11 @@ const getAllNotes = asyncHandler(async (req, res) => {
 // @desc Create new note
 // @route POST /notes
 // @access Private
-const createNewNote = asyncHandler(async (req, res)=> {
+const createNewNote = asyncHandler(async (req, res) => {
     const { user, title, text } = req.body
 
-      // Confirm data
-      if (!user || !title || !text) {
+    // Confirm data
+    if (!user || !title || !text) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -52,21 +51,21 @@ const createNewNote = asyncHandler(async (req, res)=> {
     } else {
         return res.status(400).json({ message: 'Invalid note data received' })
     }
+
 })
 
 // @desc Update a note
 // @route PATCH /notes
 // @access Private
+const updateNote = asyncHandler(async (req, res) => {
+    const { id, user, title, text, completed } = req.body
 
-const updateNote = asyncHandler(async(req, res)=>{
-    const {id, user, title, text, completed} = req.body
-
-    //Confirm data
-    if (!id || !user || !title || !text || typeof completed !== 'boolean'){
-        return res.status(400).json({message: 'All fields are required'})
+    // Confirm data
+    if (!id || !user || !title || !text || typeof completed !== 'boolean') {
+        return res.status(400).json({ message: 'All fields are required' })
     }
 
-    //Confirm note exists to update
+    // Confirm note exists to update
     const note = await Note.findById(id).exec()
 
     if (!note) {
@@ -90,6 +89,7 @@ const updateNote = asyncHandler(async(req, res)=>{
 
     res.json(`'${updatedNote.title}' updated`)
 })
+
 // @desc Delete a note
 // @route DELETE /notes
 // @access Private
